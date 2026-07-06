@@ -1,80 +1,154 @@
-# Microservices Demo Deployment using Docker Compose (Sock Shop)
+# Docker Compose Microservices Learning
+
+> Hands-on deployment and learning project using the open-source **Sock Shop** microservices application.
+
+---
 
 ## Project Overview
-This project demonstrates deployment of a cloud-native e-commerce microservices application (Sock Shop) on a local Ubuntu machine using Docker Compose. The objective was to understand containerization, service networking, orchestration, troubleshooting, and deployment of multiple independent services.
 
-## Tech Stack
+This repository documents my hands-on experience deploying the **Sock Shop** microservices application using **Docker Compose** on Ubuntu.
+
+The objective of this project was **not to develop the application**, but to understand how production-style microservices are deployed, networked, and managed using Docker Compose.
+
+**Original Repository:** https://github.com/microservices-demo/microservices-demo
+
+This repository contains my deployment notes, troubleshooting steps, screenshots, and key lessons learned.
+
+---
+
+## Objectives
+
+- Learn Docker and Docker Compose
+- Deploy a multi-container application
+- Understand Docker networking
+- Explore Traefik reverse proxy
+- Troubleshoot deployment issues
+- Verify application deployment locally
+
+---
+
+## Technologies Used
+
 - Docker
 - Docker Compose
 - Ubuntu Linux
 - Git & GitHub
-- Traefik Edge Router
+- Traefik
 - RabbitMQ
 - MySQL
-- Microservices Architecture
+- Microservices
 
-## Architecture
-The application consists of multiple independently running services:
-- Frontend
-- Catalogue Service
-- User Service
-- Cart Service
-- Orders Service
-- Shipping Service
-- Payment Service
-- Queue Master
-- RabbitMQ
-- MySQL Databases
-- Edge Router (Traefik)
+---
 
-## Features
-- Multi-container deployment
-- Service isolation
-- Internal Docker networking
-- Reverse proxy using Traefik
-- Database-backed services
-- Browser-accessible frontend
-
-## Challenges Solved
-- Resolved Docker Compose configuration issues.
-- Fixed port conflicts (8080 already in use).
-- Modified Edge Router port mapping.
-- Verified container networking.
-- Successfully launched all required containers.
-
-## Verification
-Commands used:
+## Deployment Steps
 
 ```bash
+git clone https://github.com/microservices-demo/microservices-demo.git
+
+cd microservices-demo/deploy/docker-compose
+
 docker compose up -d
+
 docker ps
-docker logs <container>
 ```
 
-Application accessed successfully from browser.
+Access the application:
+
+```
+http://localhost:8081
+```
+
+---
+
+## Challenges Faced
+
+### Docker Compose file not found
+
+**Cause:** Ran Docker Compose from the wrong directory.
+
+**Solution:** Changed to `deploy/docker-compose`.
+
+---
+
+### Port 8080 already in use
+
+**Cause:** Jenkins was using port **8080**.
+
+**Solution:** Updated the Edge Router port mapping to expose the application on **8081**.
+
+---
+
+### MYSQL_ROOT_PASSWORD warning
+
+The deployment displayed a warning because the variable was not set. The application still deployed successfully.
+
+---
+
+## What I Learned
+
+- Docker images and containers
+- Docker Compose
+- Multi-container deployments
+- Docker networking
+- Port mapping
+- Container logs
+- Reverse proxy concepts
+- Linux command-line usage
+- Troubleshooting container deployments
+
+---
+
+# Screenshots
+
+## Docker Compose Deployment
+
+![Docker Compose](docs/screenshots/01-docker-compose-up.png)
+
+---
+
+## All Containers Running
+
+![Containers Running](docs/screenshots/02-container-startup.png)
+
+---
+
+## Resolving Port Conflict
+
+![Port Conflict](docs/screenshots/03-port-conflict-fixed.png)
+
+---
+
+## Successfully Running Application
+
+![Application](docs/screenshots/04-browser-output.png)
+
+---
 
 ## Skills Demonstrated
-- Docker Containerization
+
+- Docker
 - Docker Compose
-- Linux CLI
-- Networking & Port Mapping
+- Linux
+- Git
+- GitHub
+- Container Networking
+- Troubleshooting
 - Microservices Deployment
-- Debugging Containers
-- Git Version Control
 
-## Resume Description
-
-**Dockerized Microservices Deployment | DevOps Project**
-
-- Deployed a production-style microservices e-commerce application locally using Docker Compose.
-- Managed 10+ interconnected services including frontend, backend APIs, databases, messaging, and reverse proxy.
-- Configured Docker networking and resolved runtime issues including port conflicts.
-- Validated inter-service communication and application availability through browser testing.
-- Gained practical experience with container orchestration, Linux, and DevOps workflows.
+---
 
 ## Future Improvements
-- Kubernetes deployment
-- Jenkins CI/CD pipeline
-- Monitoring using Prometheus & Grafana
-- Image scanning using Trivy
-- Deployment through Helm
+
+- Kubernetes Deployment
+- Jenkins CI/CD
+- Helm
+- Prometheus & Grafana
+- Trivy
+
+---
+
+## Acknowledgements
+
+The Sock Shop application was developed by the **Microservices Demo** project.
+
+This repository documents **my deployment process and learning experience** and is intended for educational purposes.
